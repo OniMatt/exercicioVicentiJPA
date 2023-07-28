@@ -1,0 +1,7 @@
+com/syonet/domain/Item.class
+com/syonet/dao/ItemDAOImpl.class
+com/syonet/dao/ClienteDAOImpl.class
+com/syonet/Main.class
+com/syonet/generic/GenericDAO.class
+com/syonet/domain/Cliente.class
+com/syonet/business/ClienteItemBusiness.class
