@@ -12,7 +12,6 @@ public class ClienteItemBusiness {
   private ItemDAOImpl idao = new ItemDAOImpl();
 
   public void criaClienteComItens(Cliente cliente) {
-    cdao.lista();
     List<Item> itensDoCliente = cliente.getItens();
     cdao.cria(cliente);
     idao.deletaItens(idao.lista());
