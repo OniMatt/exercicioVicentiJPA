@@ -2,6 +2,7 @@ package com.syonet.dao;
 
 import java.util.List;
 
+import com.syonet.domain.Cliente;
 import com.syonet.domain.Item;
 import com.syonet.generic.GenericDAO;
 
@@ -72,16 +73,22 @@ public class ItemDAOImpl implements GenericDAO<Item>{
     }
   }
 
-  public void deletaItens(List<Item> itens) {
-    transaction.begin();
-    try {
-      itens.stream()
-        .forEach(item -> em.remove(item));
-      transaction.commit();
-    } catch (Exception e) {
-      System.out.println(e);
-      transaction.rollback();
-    }
+  public void removeItensInexistentes(Cliente cliente) {
+    List<Item> itensNoBanco = em.createQuery("SELECT i FROM Item i WHERE cliente_id = " + cliente.getId(), Item.class)
+      .getResultList();
+
+    itensNoBanco.stream()
+      .forEach( item -> {
+        if(!verificaItem(item, cliente.getItens())) {
+          deleta(item);
+        }
+      });
   }
   
+  private boolean verificaItem(Item item, List<Item> itens) {
+    if(itens.contains(item)) {
+      return true;
+    }
+    return false;
+  }
 }

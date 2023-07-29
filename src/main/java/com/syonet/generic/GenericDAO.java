@@ -21,5 +21,5 @@ public interface GenericDAO<T> {
   default void fechaTransacao() {
     emf.close();
     em.close();
-  };
+  }
 }
